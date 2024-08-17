@@ -1,5 +1,5 @@
 # Dockerfile for Angular frontend
-FROM node:20
+FROM node:20.9
 
 # Set working directory
 WORKDIR /app
@@ -11,8 +11,9 @@ COPY package.json ./
 #RUN npm i -s -g @angular/cli
 #RUN npm i -s -g @angular-devkit/build-angular:dev-server
 #RUN npm i -g @angular-devkit/build-angular:application
-RUN npm install -g @angular/cli \
-    && npm install
+RUN npm install -g @angular/cli@17 \
+    && npm install \
+	&& npm install @clr/ui @cds/core --save
 
 # Copy the rest of the application
 COPY . .
@@ -24,4 +25,4 @@ EXPOSE 4200
 
 # Start the Angular application
 #CMD ["npm", "start"]
-CMD ["./node_modules/.bin/ng", "serve", "--host", "0.0.0.0"]
+CMD ["./node_modules/.bin/ng", "serve", "--host", "--poll 1", "--proxy-config proxy.conf.json", "0.0.0.0"]
