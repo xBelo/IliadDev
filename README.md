@@ -15,11 +15,17 @@
 1. **Symfony 7.1**: Utilizzato per il backend e la gestione delle API.
 2. **Angular 17.0**: Utilizzato per il frontend e l'interfaccia utente.
 3. **Clarity Design System**: Fornisce componenti UI per Angular.
+4. **PostgreSQL**: Database open source, utilizzato per la gestione dei dati
+
+### Sistema
+
+1. Per il progetto è stato utilizzato Windows 11.
+2. Assicurarsi che le porte 4200 (per il frontend), 8000 (per il backend) e 5432 (per il database) siano libere
 
 ## installazione ed avvio del Progetto
 
-1. Eseguire docker e lanciare il motore di gestione dei container
-2. Clonare il repository nella cartella desiderata e posizionarsi al suo interno
+1. Eseguire docker e lanciare il motore di gestione dei container.
+2. Clonare il repository nella cartella desiderata e posizionarsi al suo interno.
 
 ### Metodo 1: Utilizzare l'Eseguibile `start.bat`
 
