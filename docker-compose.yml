@@ -49,7 +49,7 @@ services:
       - /app/node_modules
       - ./frontend:/app
     command: >
-        /bin/bash -c "npm install && ng serve --host 0.0.0.0 --poll=1000"
+        /bin/bash -c "npm install && ng serve --host 0.0.0.0 --poll=1000 --proxy-config proxy.conf.json"
     
   pgadmin:
     image: dpage/pgadmin4

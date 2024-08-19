@@ -1,22 +1,32 @@
-<form clrForm [clrLayout]="'horizontal'">
-    <clr-input-container>
-      <label for="name">Order Name</label>
-      <input clrInput type="text" id="name" [(ngModel)]="order.name" [ngModelOptions]="{standalone: true}" required />
-      <clr-control-error *clrIfError="'required'">Name is required</clr-control-error>
-    </clr-input-container>
-  
-    <clr-input-container>
-      <label for="description">Description</label>
-      <input clrInput type="text" id="description" [(ngModel)]="order.description"  [ngModelOptions]="{standalone: true}" />
-    </clr-input-container>
-  
-    <clr-date-container>
-      <label for="date">Order Date</label>
-      <input clrDate type="date" id="date" [(ngModel)]="order.date"  [ngModelOptions]="{standalone: true}" required />
-      <clr-control-error *clrIfError="'required'">Date is required</clr-control-error>
-    </clr-date-container>
-  
-    <button class="btn btn-primary" type="submit" (click)="onSubmit()">Create Order</button>
-    <a class="btn btn-secondary" routerLink="/">Cancel</a>
-</form>
-  
+<div class="clr-row">
+  <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+    <div class="card">
+      <div class="card-header">Order detail</div>
+      <div class="card-block">
+          <div *ngIf="order;">
+            <form clrForm [clrLayout]="'horizontal'">
+                <clr-input-container>
+                  <label for="name">Order Name</label>
+                  <input clrInput type="text" id="name" [(ngModel)]="order.name" [ngModelOptions]="{standalone: true}" required />
+                  <clr-control-error *clrIfError="'required'">Name is required</clr-control-error>
+                </clr-input-container>
+              
+                <clr-input-container>
+                  <label for="description">Description</label>
+                  <input clrInput type="text" id="description" [(ngModel)]="order.description"  [ngModelOptions]="{standalone: true}" />
+                </clr-input-container>
+              
+                <clr-date-container>
+                  <label for="date">Order Date</label>
+                  <input clrDate type="date" id="date" [(ngModel)]="order.date"  [ngModelOptions]="{standalone: true}" required />
+                  <clr-control-error *clrIfError="'required'">Date is required</clr-control-error>
+                </clr-date-container>
+                <br>
+                <button class="btn btn-primary" type="submit" (click)="onSubmit()">Create Order</button>&nbsp;
+                <a class="btn btn-secondary" routerLink="/">Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

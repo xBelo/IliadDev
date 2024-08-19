@@ -112,9 +112,15 @@ class ApiOrderController extends AbstractController
     #[Route('/api/order/create', name: 'app_api_order_create')]
     public function create(Request $request): JsonResponse
     {
+        if ($_SERVER['APP_DEBUG']) {
+            header('Access-Control-Allow-Origin:'.rtrim($_SERVER['HTTP_REFERER'], '/'));
+        }
+        header('Access-Control-Allow-Headers:*');
+        header('Access-Control-Allow-Credentials:true');
+        header('Access-Control-Allow-Headers:X-Requested-With, Content-Type, withCredentials');
+
         $data = json_decode($request->getContent(), true);
         $order = new Order();
-
         $order->setName($data['name']);
         $order->setDescription($data['description']);
         $order->setDate($data['date']);

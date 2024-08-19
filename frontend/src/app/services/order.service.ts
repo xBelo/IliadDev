@@ -26,7 +26,7 @@ export class OrderService {
   }
 
   createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrl}/create/`, order);
+    return this.http.post<Order>(`${this.apiUrl}/create`, order);
   }
 
   updateOrder(id: number, order: Order): Observable<Order> {
