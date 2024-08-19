@@ -14,7 +14,7 @@ final class Version20240814194455 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return 'Create order and products tables with many-to-many relationship';
+        return '';
     }
 
     public function up(Schema $schema) : void
@@ -49,7 +49,7 @@ final class Version20240814194455 extends AbstractMigration
         $this->addSql('DROP TABLE order_products');
 
         // This migration drops the order table
-        $this->addSql('DROP TABLE `order`');
+        $this->addSql('DROP TABLE order');
 
         // This migration drops the products table
         $this->addSql('DROP TABLE products');

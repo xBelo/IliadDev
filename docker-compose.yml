@@ -26,9 +26,6 @@ services:
     container_name: symfony_app
     environment:
       DATABASE_URL: postgresql://postgres:password@db:5432/iliad
-    volumes:
-      - ./backend/ini/php.ini-development:/usr/local/etc/php/php.ini-development
-      - ./backend/ini/php.ini-production:/usr/local/etc/php/php.ini-production
     ports:
       - 8000:8000
     depends_on:
