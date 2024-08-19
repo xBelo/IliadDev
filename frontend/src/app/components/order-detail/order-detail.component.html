@@ -1,1 +1,36 @@
-<p>order-detail works!</p>
+<div class="clr-row">
+    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+      <div class="card">
+        <div class="card-header">Order detail</div>
+        <div class="card-block">
+            <div *ngIf="order; else noOrder">
+                <div class="order-details">
+                  <h4>Order ID: {{order.id}}</h4>
+                  <p><strong>Name:</strong> {{order.name}}</p>
+                  <p><strong>Description:</strong> {{order.description}}</p>
+                  <p><strong>Date:</strong> {{order.date}}</p>
+                </div>
+
+                <clr-datagrid>
+                    <clr-dg-column>Product ID</clr-dg-column>
+                    <clr-dg-column>Name</clr-dg-column>
+                    <clr-dg-column>Price</clr-dg-column>
+            
+                    <clr-dg-row *ngFor="let product of order.products">
+                      <clr-dg-cell>{{product.id}}</clr-dg-cell>
+                      <clr-dg-cell>{{product.name}}</clr-dg-cell>
+                      <clr-dg-cell>{{product.price | currency}}</clr-dg-cell>
+                    </clr-dg-row>
+                  </clr-datagrid>
+            
+                  <button (click)="goToEditOrder()" class="btn btn-primary">Edit Order</button>
+                  <button (click)="goToHome()" class="btn btn-secondary">Back to Home</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noOrder>
+    <p>Order not found.</p>
+  </ng-template>

@@ -1,0 +1,6 @@
+framework:
+  serializer:
+    enabled: true
+    default_context:
+      groups: ['order:read', 'order:write']
+      enable_max_depth: true

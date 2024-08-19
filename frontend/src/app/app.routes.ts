@@ -8,9 +8,9 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 
 export const routes: Routes = [
   { path: 'api/order', component: OrderListComponent },
-  { path: 'order/create', component: OrderCreateComponent },
-  { path: 'order/edit/:id', component: OrderEditComponent },
-  { path: 'order/:id', component: OrderDetailComponent },
+  { path: 'api/order/create', component: OrderCreateComponent },
+  { path: 'api/order/edit/:id', component: OrderEditComponent },
+  { path: 'api/order/view/:id', component: OrderDetailComponent },
   { path: '', component: OrderListComponent }
 ];
 

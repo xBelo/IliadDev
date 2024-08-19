@@ -1,1 +1,41 @@
-<p>order-list works!</p>
+<div class="container">
+    <button class="btn btn-primary mb-3" (click)="createOrder()">Create New Order</button>
+    <form clrForm>
+        <clr-input-container>
+          <label for="name">Name</label>
+          <input clrInput id="name" [(ngModel)]="nameFilter" [ngModelOptions]="{standalone: true}" (ngModelChange)="onSearch()">
+        </clr-input-container>
+      
+        <clr-input-container>
+          <label for="description">Description</label>
+          <input clrInput id="description" [(ngModel)]="descriptionFilter" [ngModelOptions]="{standalone: true}" (ngModelChange)="onSearch()">
+        </clr-input-container>
+      
+        <clr-input-container>
+          <label for="date">Date</label>
+          <input clrInput id="date" type="date" [(ngModel)]="dateFilter" [ngModelOptions]="{standalone: true}" (ngModelChange)="onSearch()">
+        </clr-input-container>
+      
+        <button clrButton class="btn btn-warning btn-sm" (click)="onResetFilters()">Reset Filters</button>
+    </form>
+    <clr-datagrid>
+      <clr-dg-column>Id</clr-dg-column>
+      <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column>Description</clr-dg-column>
+      <clr-dg-column>Date</clr-dg-column>
+      <clr-dg-column>Actions</clr-dg-column>
+  
+      <clr-dg-row *ngFor="let order of orders">
+        <clr-dg-cell>{{ order.id }}</clr-dg-cell>
+        <clr-dg-cell>{{ order.name }}</clr-dg-cell>
+        <clr-dg-cell>{{ order.description }}</clr-dg-cell>
+        <clr-dg-cell><data value="{{order.date}}">{{ order.date  | date: 'dd/MM/yyyy'}}</data></clr-dg-cell>
+        <clr-dg-cell>
+          <button class="btn btn-light btn-sm" (click)="viewOrder(order.id)">View</button>
+          <button class="btn btn-warning btn-sm" (click)="editOrder(order.id)">Edit</button>
+          <button class="btn btn-danger btn-sm ml-2" (click)="deleteOrder(order.id)">Delete</button>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  

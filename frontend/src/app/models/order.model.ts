@@ -1,6 +1,9 @@
+import { Products } from "./products.model";
+
 export interface Order {
     id: number;
-    nome: string;
+    name: string;
     description: string;
     date: Date;
+    products: Products[]|null
   }

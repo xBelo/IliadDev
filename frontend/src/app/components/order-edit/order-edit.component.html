@@ -1,1 +1,34 @@
-<p>order-edit works!</p>
+<div class="clr-row">
+    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+      <div class="card">
+        <div class="card-header">Order detail</div>
+        <div class="card-block">
+            <div *ngIf="order; else noOrder">
+                <form clrForm (ngSubmit)="onSubmit()" #orderForm="ngForm">
+                    <clr-input-container>
+                        <label for="name">Name</label>
+                        <input clrInput id="name" [(ngModel)]="order.name" name="name" required />
+                    </clr-input-container>
+            
+                    <clr-input-container>
+                        <label for="description">Description</label>
+                        <input clrInput id="description" [(ngModel)]="order.description" name="description" />
+                    </clr-input-container>
+            
+                    <clr-input-container>
+                        <label for="date">Date</label>
+                        <input clrInput id="date" type="datetime" [(ngModel)]="order.date" name="date" />
+                    </clr-input-container>
+            
+                    <button class="btn btn-primary" type="submit" [disabled]="!orderForm.form.valid">Save</button>&nbsp;
+                    <a class="btn btn-secondary" routerLink="/api/order/view/{{order.id}}">Cancel</a>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+  
+  <ng-template #noOrder>
+    <p>Order not found.</p>
+  </ng-template>

@@ -19,6 +19,7 @@ class OrderFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < 50; $i++) {
             $order = new Order();
             $order->setDate($faker->dateTimeThisYear());
+            $order->setName('Order ' . $i+1);
             $order->setDescription($faker->randomElement(['pending', 'completed', 'shipped']));
 
             // Associa ordini a prodotti in modo casuale
@@ -27,7 +28,7 @@ class OrderFixtures extends Fixture implements DependentFixtureInterface
                 $orderProducts[] = $faker->randomElement($products);
             }
             foreach ($orderProducts as $product) {
-                $order->addProduct($product);
+                $order->addProducts($product);
             }
 
             $manager->persist($order);
