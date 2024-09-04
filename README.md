@@ -22,7 +22,7 @@
 1. Per il progetto è stato utilizzato Windows 11.
 2. Assicurarsi che le porte 4200 (per il frontend), 8000 (per il backend) e 5432 (per il database) siano libere
 
-## installazione ed avvio del Progetto
+## Installazione ed avvio del Progetto
 
 1. Eseguire docker e lanciare il motore di gestione dei container.
 2. Clonare il repository nella cartella desiderata e posizionarsi al suo interno.
@@ -39,3 +39,7 @@
 
 2. **Esegui il Comando Docker**:
    - Lancia il seguente comando per costruire e avviare i contenitori Docker:
+
+## Eseguire l'applicazione
+
+1. Aprire il frontend attraverso seguente URL: (http://localhost:4200/)
