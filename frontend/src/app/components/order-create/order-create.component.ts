@@ -20,7 +20,7 @@ export class OrderCreateComponent {
     name: '',
     description: '',
     date: new Date,
-    products: null
+    products: null,
   };
 
   constructor(private orderService: OrderService, private router: Router) {}
@@ -28,8 +28,10 @@ export class OrderCreateComponent {
   onSubmit() {
     this.orderService.createOrder(this.order).subscribe(
       (response) => {
-        this.router.navigate(['/api/order/create']);
         const createdOrderId = response.id;
+        const isNewOrder = response.description;
+        if(isNewOrder == 'alreadyExist')
+          alert("Attenzione! L'ordine è gia esistente. Verrete reindirizzati sulla pagina dell'ordine.");
         this.router.navigate(['/api/order/view', createdOrderId]);
       },
       error => console.error('Error creating order:', error)
