@@ -38,7 +38,7 @@
    - Posizionati sulla radice del progetto utilizzando il terminale PowerShell.
 
 2. **Esegui il Comando Docker**:
-   - Lancia il seguente comando per costruire e avviare i contenitori Docker:
+   - Lancia il seguente comando per costruire e avviare i contenitori Docker: `docker-compose up --build`
 
 ## Eseguire l'applicazione
 
