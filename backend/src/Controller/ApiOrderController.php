@@ -10,19 +10,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class ApiOrderController extends AbstractController
 {
     private $entityManager;
     private $orderRepository;
-    private $serializer;
 
-    public function __construct(EntityManagerInterface $entityManager, OrderRepository $orderRepository, SerializerInterface $serializer)
+    public function __construct(EntityManagerInterface $entityManager, OrderRepository $orderRepository)
     {
         $this->entityManager = $entityManager;
         $this->orderRepository = $orderRepository;
-        $this->serializer = $serializer;
     }
 
     #[Route('/api/order', name: 'app_api_order')]
@@ -112,39 +109,46 @@ class ApiOrderController extends AbstractController
     #[Route('/api/order/create', name: 'app_api_order_create')]
     public function create(Request $request): JsonResponse
     {
-        if ($_SERVER['APP_DEBUG']) {
-            header('Access-Control-Allow-Origin:'.rtrim($_SERVER['HTTP_REFERER'], '/'));
-        }
-        header('Access-Control-Allow-Headers:*');
-        header('Access-Control-Allow-Credentials:true');
-        header('Access-Control-Allow-Headers:X-Requested-With, Content-Type, withCredentials');
-
         $data = json_decode($request->getContent(), true);
         $order = new Order();
+
         $order->setName($data['name']);
         $order->setDescription($data['description']);
-        $order->setDate($data['date']);
+        $order->setDate(new \DateTime($data['date']));
 
         $this->entityManager->persist($order);
         $this->entityManager->flush();
-        return $this->json($order, 201);
+
+        // Restituisce la risposta JSON
+        return $this->json([
+            'id' => $order->getId(),
+            'name' => $order->getName(),
+            'description' => $order->getDescription(),
+            'date' => $order->getDate()->format('Y-m-d H:i:s'),
+        ], Response::HTTP_CREATED);
     }
 
-    #[Route('/api/order/edit/{id}', name: 'app_api_order_edit', methods: ['PUT'])]
+    #[Route('/api/order/edit/{id}', name: 'app_api_order_edit')]
     public function update($id, Request $request): JsonResponse
     {
         $order = $this->orderRepository->find($id);
         if (!$order) {
-            return $this->json(['message' => 'Ordine non trovato'], 404);
+            return $this->json(['message' => 'Ordine non trovato'], Response::HTTP_NOT_FOUND);
         }
         $data = json_decode($request->getContent(), true);
 
         $order->setName($data['name']);
         $order->setDescription($data['description']);
+        $order->setDate(new \DateTime($data['date']));
 
         $this->entityManager->persist($order);
         $this->entityManager->flush();
-        return $this->json($order);
+        return $this->json([
+            'id' => $order->getId(),
+            'name' => $order->getName(),
+            'description' => $order->getDescription(),
+            'date' => $order->getDate()->format('Y-m-d H:i:s'),
+        ], Response::HTTP_OK);
     }
 
     #[Route('/api/order/delete/{id}', name: 'app_api_order_delete', methods: ['DELETE'])]
