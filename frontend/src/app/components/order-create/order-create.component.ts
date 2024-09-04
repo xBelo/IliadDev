@@ -26,9 +26,20 @@ export class OrderCreateComponent {
   constructor(private orderService: OrderService, private router: Router) {}
 
   onSubmit() {
-    this.orderService.createOrder(this.order).subscribe((createdOrder) => {
-      this.router.navigate(['/orders/view', createdOrder.id]);
-    });
+    this.orderService.createOrder(this.order).subscribe(
+      (response) => {
+        this.router.navigate(['/api/order/create']);
+        const createdOrderId = response.id;
+        this.router.navigate(['/api/order/view', createdOrderId]);
+      },
+      error => console.error('Error creating order:', error)
+    );
+    if (this.order) {
+      this.router.navigate(['/api/order/edit', this.order.id]);
+    }
+    //this.orderService.createOrder(this.order).subscribe((createdOrder) => {
+    //  this.router.navigate(['/orders/view', createdOrder.id]);
+    //});
     //this.orderService.createOrder(this.order).subscribe(
     //  error => console.error('Error updating order:', error)
     //);

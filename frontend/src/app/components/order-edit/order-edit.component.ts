@@ -42,7 +42,7 @@ export class OrderEditComponent implements OnInit {
 
   onSubmit(): void {
     this.orderService.updateOrder(this.order.id, this.order).subscribe(
-      () => this.router.navigate(['/api/order/update']),
+      () => this.router.navigate(['/api/order/view', this.order.id]),
       error => console.error('Error updating order:', error)
     );
   }
