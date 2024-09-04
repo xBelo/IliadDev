@@ -110,8 +110,13 @@ class ApiOrderController extends AbstractController
     public function create(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        $order = $this->orderRepository->findOneBy(['name' => $data['name']]);
+        if($order)
+            return $this->json([
+                'id' => $order->getId(),
+                'description' => 'alreadyExist',
+            ], Response::HTTP_OK);
         $order = new Order();
-
         $order->setName($data['name']);
         $order->setDescription($data['description']);
         $order->setDate(new \DateTime($data['date']));
@@ -125,6 +130,7 @@ class ApiOrderController extends AbstractController
             'name' => $order->getName(),
             'description' => $order->getDescription(),
             'date' => $order->getDate()->format('Y-m-d H:i:s'),
+            'isNew' => true
         ], Response::HTTP_CREATED);
     }
 
